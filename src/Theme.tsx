@@ -5,7 +5,9 @@ const theme = {
   colors: {
     primary: "#EE5A6F",
     secundary: "#06B49A",
-    gray: "#3b444b",
+    grayLight: "#dddddd",
+    white: "#FFFFFF",
+    black: "#000000",
   },
   fonts: ["sans-serif", "Roboto"],
   fontSizes: {
