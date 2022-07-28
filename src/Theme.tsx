@@ -6,6 +6,7 @@ const theme = {
     primary: "#EE5A6F",
     secundary: "#06B49A",
     grayLight: "#dddddd",
+    gray: "#888888",
     white: "#FFFFFF",
     black: "#000000",
   },

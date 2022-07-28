@@ -1,25 +1,25 @@
 import React from "react";
-import { Plus } from "react-feather";
+import { Table } from "react-feather";
+import { useRecoilValue } from "recoil";
 
-import { Button } from "../components/Button/button";
-import Input from "../components/Input/input";
+import InvoiceCard from "../components/InvoiceCard/invoiceCard";
+import { invoicesMock } from "../mocks/invoicesMock";
+import invoiceAtom from "../recoil/invoice/atom";
 import { Container } from "../utils/styles/Container";
 import { Content } from "./home.styles";
 
 interface Props {}
 
 const Home: React.FC<Props> = () => {
-  const onClick = () => {};
+  const invoices = useRecoilValue(invoiceAtom);
 
   return (
     <>
       <Container>
         <Content>
-          <Button onClick={onClick} color="primary">
-            <Plus />
-            Adicionar
-          </Button>
-          <Input name="name" label="Nome" />
+          {invoices.map((invoice) => (
+            <InvoiceCard key={invoice.id} invoice={invoice} />
+          ))}
         </Content>
       </Container>
     </>
