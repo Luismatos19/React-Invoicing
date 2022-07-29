@@ -16,7 +16,16 @@ const theme = {
     medium: "2em",
     large: "3em",
   },
-  paddings: {},
+  paddings: {
+    small: "0.5em",
+    medium: "1em",
+    large: "2em",
+  },
+  margins: {
+    small: "0.5em",
+    medium: "1em",
+    large: "2em",
+  },
 };
 
 interface Props {

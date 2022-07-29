@@ -7,10 +7,10 @@ export const Card = styled.div`
   width: 80%;
   border: 2px solid ${({ theme: { colors } }) => colors.black};
   border-radius: 10px;
-  padding: 5px;
-  margin-bottom: 15px;
+  padding: 0.2em;
+  margin-bottom: 0.5em;
   cursor: pointer;
-  font-size: 30px;
+  font-size: 2em;
 
   :hover {
     box-shadow: 5px 10px ${({ theme: { colors } }) => colors.gray};
@@ -19,12 +19,13 @@ export const Card = styled.div`
 `;
 
 export const Avatar = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 50px;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  margin-right: 0.3em;
   border: 2px solid ${({ theme: { colors } }) => colors.black}; ;
 `;
 
 export const Info = styled.div`
-  padding-right: 30px;
+  padding-right: 3em;
 `;

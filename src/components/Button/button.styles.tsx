@@ -4,17 +4,21 @@ import { ButtonProps } from "./button";
 
 export const ButtonDefault = styled.button<ButtonProps>`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 0px 25px;
+  padding: 0px 2em;
   cursor: pointer;
   border: none;
   border-radius: 5px;
   font-weight: 500;
   outline: none;
   transition: all 0.2s;
-  height: 40px;
-  width: 150px;
+  height: 4em;
+  width: 12em;
+
+  :hover {
+    border: 1px solid ${({ theme: { colors } }) => colors.black};
+  }
 
   .icon {
     width: 20px;

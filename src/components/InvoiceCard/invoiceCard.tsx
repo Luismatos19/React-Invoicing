@@ -6,9 +6,10 @@ import CompanyLogo from "../../assets/images/company-logo.jpg";
 
 interface Props {
   invoice: Invoice;
+  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void;
 }
 
-const InvoiceCard: React.FC<Props> = ({ invoice }) => {
+const InvoiceCard: React.FC<Props> = ({ invoice, onClick }) => {
   const INVOICE_ITENS_LENGTH = invoice.items.length;
 
   const hasLogo = () => {
@@ -19,7 +20,7 @@ const InvoiceCard: React.FC<Props> = ({ invoice }) => {
 
   return (
     <>
-      <Card>
+      <Card onClick={onClick}>
         <Avatar src={hasLogo()} />
         <Info>{invoice.customer_info.name}</Info>
         <Info>{invoice.company_info.name}</Info>
