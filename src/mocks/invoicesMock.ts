@@ -25,19 +25,22 @@ export const invoicesMock: Invoice[]= [
                 "id": 1,
                 "quantity": 10,
                 "description": "Gadget",
-                "cost": 9.95
+                "cost": 9.95,
+                "discount": 5
             },
             {
                 "id": 2,
                 "quantity": 10,
                 "description": "Gadget",
-                "cost": 9.95
+                "cost": 9.95,
+                "discount": 15
             },
             {
                 "id": 3,
                 "quantity": 10,
                 "description": "Gadget",
-                "cost": 9.95
+                "cost": 9.95,
+                "discount": 25
             }
         ]
     },
@@ -65,7 +68,8 @@ export const invoicesMock: Invoice[]= [
                 "id": 1,
                 "quantity": 10,
                 "description": "Gadget",
-                "cost": 9.95
+                "cost": 9.95,
+                "discount": 50
             }
         ]
     },
@@ -93,7 +97,8 @@ export const invoicesMock: Invoice[]= [
                 "id": 1,
                 "quantity": 10,
                 "description": "Gadget",
-                "cost": 9.95
+                "cost": 9.95,
+                "discount": 5
             }
         ]
     }

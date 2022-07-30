@@ -53,3 +53,14 @@ export const PrintMode = styled("div")<{ active: boolean }>`
     max-height: 100%;
   `}
 `;
+
+export const InfoHeader = styled.div`
+  display: flex;
+  width: 80%;
+  justify-content: space-between;
+  margin-bottom: ${({ theme: { margins } }) => margins.medium};
+
+  p:first-child {
+    width: 7%;
+  }
+`;

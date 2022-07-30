@@ -12,6 +12,7 @@ import { hasLogo } from "../../utils/functions/validateLogo";
 import { Container } from "../../utils/styles/Container";
 import {
   ButtonContainer,
+  InfoHeader,
   Infos,
   InfoSection,
   Logo,
@@ -94,6 +95,14 @@ const Invoice: React.FC<Props> = () => {
           </Section>
 
           <Subtitle className="items">Itens</Subtitle>
+          <InfoHeader>
+            <p>Descrição</p>
+            <p>Quantidade</p>
+            <p>Preço</p>
+            <p>Desconto %</p>
+            <p>Total</p>
+            <p>Açoes</p>
+          </InfoHeader>
           {invoice.items.map((item, index) => (
             <InvoiceItenCard
               key={index}

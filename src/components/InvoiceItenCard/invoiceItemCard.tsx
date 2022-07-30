@@ -13,7 +13,9 @@ interface Props {
 
 const InvoiceItemCard: React.FC<Props> = ({ invoiceItem, invoiceId }) => {
   const total = () => {
-    return invoiceItem.cost * invoiceItem.quantity;
+    return (
+      (invoiceItem.cost * invoiceItem.quantity * invoiceItem.discount) / 100
+    );
   };
 
   const [invoices, setInvoices] = useRecoilState(invoiceAtom);
@@ -38,6 +40,7 @@ const InvoiceItemCard: React.FC<Props> = ({ invoiceItem, invoiceId }) => {
         <p>{invoiceItem.description}</p>
         <p>{invoiceItem.quantity}</p>
         <p>{invoiceItem.cost}</p>
+        <p>{invoiceItem.discount}</p>
         <p>{total()}</p>
         <Icon>
           <Trash2 onClick={handleDeleteItem} />

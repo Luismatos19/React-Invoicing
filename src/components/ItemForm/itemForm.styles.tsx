@@ -7,4 +7,8 @@ export const Form = styled.form`
   background-color: ${({ theme: { colors } }) => colors.primary};
   max-width: 80%;
   margin: ${({ theme: { margins } }) => margins.medium};
+
+  Input {
+    width: 60%;
+  }
 `;

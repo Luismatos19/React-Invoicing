@@ -16,6 +16,7 @@ const ItemForm: React.FC<Props> = ({ invoiceId }) => {
   const [description, setDescription] = useState<string>("");
   const [cost, setCost] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(0);
+  const [discount, setDiscount] = useState<number>(0);
 
   const [invoices, setInvoices] = useRecoilState(invoiceAtom);
 
@@ -28,6 +29,7 @@ const ItemForm: React.FC<Props> = ({ invoiceId }) => {
       description: description,
       cost: cost,
       quantity: quantity,
+      discount: discount,
     };
     const newInvoicesList: Invoice[] = JSON.parse(JSON.stringify(invoices));
     const invoice: any = newInvoicesList.find((item) => item.id === invoiceId);
@@ -56,6 +58,12 @@ const ItemForm: React.FC<Props> = ({ invoiceId }) => {
           name="quantity"
           type="number"
           onChange={(e) => setQuantity(Number(e.target.value))}
+        />
+        <Input
+          label="Desconto"
+          name="discount"
+          type="number"
+          onChange={(e) => setDiscount(Number(e.target.value))}
         />
         <Button type="submit" color="secondary">
           Adicionar
