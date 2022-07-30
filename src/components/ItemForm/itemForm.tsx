@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRecoilState } from "recoil";
+
 import invoiceAtom from "../../recoil/invoice/atom";
 import { Invoice } from "../../types/Invoice";
 import { Button } from "../Button/button";
@@ -31,7 +32,7 @@ const ItemForm: React.FC<Props> = ({ invoiceId }) => {
     const newInvoicesList: Invoice[] = JSON.parse(JSON.stringify(invoices));
     const invoice: any = newInvoicesList.find((item) => item.id === invoiceId);
     invoice.items = [...invoice.items, newItem];
-    console.log(newInvoicesList);
+
     setInvoices(newInvoicesList);
   };
 

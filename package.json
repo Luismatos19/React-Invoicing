@@ -17,6 +17,7 @@
     "react-feather": "^2.0.10",
     "react-router-dom": "6",
     "react-scripts": "5.0.1",
+    "react-to-print": "^2.14.7",
     "recoil": "^0.7.4",
     "recoil-persist": "^4.2.0",
     "styled-components": "^5.3.5",
