@@ -21,17 +21,20 @@ export const invoicesMock: Invoice[]= [
             "postal": "M5S 1B6"
         },
         "items": [
-            {
+            {   
+                "id": 1,
                 "quantity": 10,
                 "description": "Gadget",
                 "cost": 9.95
             },
             {
+                "id": 2,
                 "quantity": 10,
                 "description": "Gadget",
                 "cost": 9.95
             },
             {
+                "id": 3,
                 "quantity": 10,
                 "description": "Gadget",
                 "cost": 9.95
@@ -59,6 +62,7 @@ export const invoicesMock: Invoice[]= [
         },
         "items": [
             {
+                "id": 1,
                 "quantity": 10,
                 "description": "Gadget",
                 "cost": 9.95
@@ -85,7 +89,8 @@ export const invoicesMock: Invoice[]= [
             "postal": "M5S 1B6"
         },
         "items": [
-            {
+            {   
+                "id": 1,
                 "quantity": 10,
                 "description": "Gadget",
                 "cost": 9.95

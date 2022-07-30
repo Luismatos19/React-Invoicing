@@ -16,4 +16,9 @@ export const Card  = styled.div`
     }
 `
 export const Icon = styled.span`
-    cursor: pointer;`
+    cursor: pointer;
+
+    :hover {
+        color: ${({ theme: { colors } }) => colors.primary};
+    }
+    `

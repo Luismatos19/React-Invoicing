@@ -1,32 +1,49 @@
 import React from "react";
-import { InvoiceIten } from "../../types/InvoiceIten";
+import { InvoiceItem } from "../../types/InvoiceItem";
 import { Card, Icon } from "./invoiceItemCard.styles";
 import { Trash2 } from "react-feather";
+import { useRecoilState } from "recoil";
+import invoiceAtom from "../../recoil/invoice/atom";
+import { Invoice } from "../../types/Invoice";
 
 interface Props {
-  invoiceIten: InvoiceIten;
+  invoiceItem: InvoiceItem;
   invoiceId: number;
 }
 
-const InvoiceItenCard: React.FC<Props> = ({ invoiceIten, invoiceId }) => {
+const InvoiceItemCard: React.FC<Props> = ({ invoiceItem, invoiceId }) => {
   const total = () => {
-    return invoiceIten.cost * invoiceIten.quantity;
+    return invoiceItem.cost * invoiceItem.quantity;
   };
 
-  const handleDeleteIten = () => {};
+  const [invoices, setInvoices] = useRecoilState(invoiceAtom);
+
+  const handleDeleteItem = () => {
+    const newInvoicesList: Invoice[] = JSON.parse(JSON.stringify(invoices));
+
+    const newInvoice = newInvoicesList.find((item) => item.id === invoiceId);
+
+    const index = Number(
+      newInvoice?.items.findIndex((item) => item.id === invoiceItem.id)
+    );
+
+    newInvoice?.items.splice(index, index + 1);
+
+    setInvoices(newInvoicesList);
+  };
 
   return (
     <>
       <Card>
-        <p>{invoiceIten.description}</p>
-        <p>{invoiceIten.quantity}</p>
-        <p>{invoiceIten.cost}</p>
+        <p>{invoiceItem.description}</p>
+        <p>{invoiceItem.quantity}</p>
+        <p>{invoiceItem.cost}</p>
         <p>{total()}</p>
         <Icon>
-          <Trash2 onClick={handleDeleteIten} />
+          <Trash2 onClick={handleDeleteItem} />
         </Icon>
       </Card>
     </>
   );
 };
-export default InvoiceItenCard;
+export default InvoiceItemCard;

@@ -1,6 +1,6 @@
 import { Company } from "./Company";
 import { Costumer } from "./Costumer";
-import { InvoiceIten } from "./InvoiceIten";
+import { InvoiceItem } from "./InvoiceItem";
 
 export interface Invoice {
   id: number;
@@ -9,5 +9,5 @@ export interface Invoice {
   logo: string;
   customer_info: Costumer;
   company_info: Company;
-  items: InvoiceIten[];
+  items: InvoiceItem[];
 }

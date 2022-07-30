@@ -1,12 +1,12 @@
 import React from "react";
-import { Plus } from "react-feather";
 import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { Button } from "../../components/Button/button";
 import InvoiceItenCard from "../../components/InvoiceItenCard/invoiceItemCard";
+import ItemForm from "../../components/ItemForm/itemForm";
 
 import Title from "../../components/Title/title";
-import getInvoiceById from "../../recoil/invoice/invoiceState";
+import getInvoiceById from "../../recoil/invoice/getInvoiceById";
 import { Container } from "../../utils/styles/Container";
 import { Infos, Subtitle } from "./invoice.styles";
 
@@ -14,10 +14,11 @@ interface Props {}
 
 const Invoice: React.FC<Props> = () => {
   let params = useParams();
+  const invoiceId = Number(params.id);
 
-  const invoice = useRecoilValue(getInvoiceById(Number(params.id)))[0];
+  const invoice = useRecoilValue(getInvoiceById(invoiceId))[0];
 
-  const handleAddItem = () => {};
+  const handlePrintMode = () => {};
 
   return (
     <>
@@ -60,15 +61,16 @@ const Invoice: React.FC<Props> = () => {
         </Infos>
 
         <Subtitle>Itens</Subtitle>
-        {invoice.items.map((iten, index) => (
+        {invoice.items.map((item, index) => (
           <InvoiceItenCard
             key={index}
-            invoiceIten={iten}
+            invoiceItem={item}
             invoiceId={invoice.id}
           />
         ))}
-        <Button onClick={handleAddItem} color="primary">
-          Adicionar item
+        <ItemForm invoiceId={invoice.id} />
+        <Button onClick={handlePrintMode} color="primary">
+          Modo Print
         </Button>
       </Container>
     </>

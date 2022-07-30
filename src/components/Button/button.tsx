@@ -2,7 +2,8 @@ import React from "react";
 
 import { ButtonDefault } from "./button.styles";
 
-export interface ButtonProps {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children: React.ReactNode;
   color?: "primary" | "secondary";
