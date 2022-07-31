@@ -10,11 +10,9 @@ import { Content } from "./home.styles";
 import { Plus } from "react-feather";
 import Title from "../../components/Title/title";
 
-interface Props {}
-
-const Home: React.FC<Props> = () => {
+const Home: React.FC = () => {
   const invoices = useRecoilValue(invoiceAtom);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleAddInvoice = () => {};
 

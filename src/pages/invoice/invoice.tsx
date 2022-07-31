@@ -25,14 +25,12 @@ import {
 import { currencyOptionsMock } from "../../mocks/currencyOptionsMock";
 import currencyAtom from "../../recoil/Currency/atom";
 
-interface Props {}
-
-const Invoice: React.FC<Props> = () => {
+const Invoice: React.FC = () => {
   const [isPrintMode, setIsPrintMode] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const componentRef = useRef(null);
 
-  let params = useParams();
+  const params = useParams();
   const invoiceId = Number(params.id);
 
   const invoice = useRecoilValue(getInvoiceById(invoiceId))[0];
