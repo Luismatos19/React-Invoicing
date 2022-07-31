@@ -12,19 +12,19 @@ const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
 
 const config = {
   mode: 'development',
-  entry: app_dir + '/app.tsx',
+  entry: app_dir + '/index.tsx',
   output: {
-    path: __dirname + '/dist',
-    filename: 'app.js',
-    publicPath: '/dist/'
+    path: __dirname + '/build',
+    filename: 'bundle.js',
+    publicPath: '/build/'
   },
+  devtool: 'cheap-module-source-map',
   module: {
     rules: [{
         test: /\.s?css$/,
         use: [
           'style-loader',
           'css-loader',
-          'sass-loader'
         ]
       },
       {
@@ -76,25 +76,20 @@ const config = {
     removeEmptyChunks: false,
     splitChunks: false,
   },
+  mode: "development",
   devServer: {
     // contentBase
     static : {
-      directory : path.join(__dirname, "public/")
+      directory : path.join(__dirname, "/public/")
     },
-    port: 3001,
+    port: 3000,
+    compress: true,
     // publicPath
     devMiddleware:{
-       publicPath: "https://localhost:3000/dist/",
+       publicPath: "https://localhost:3000/build/",
      },
     // // hotOnly
     hot: true,
   },
-  // devServer: {
-  //   port: 8080,
-  //   // open: true,
-  //   hot: true,
-  //   inline: true,
-  //   historyApiFallback: true,
-  // },
 };
 module.exports = config;
