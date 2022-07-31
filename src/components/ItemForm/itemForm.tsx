@@ -20,7 +20,7 @@ const ItemForm: React.FC<Props> = ({ invoiceId }) => {
 
   const [invoices, setInvoices] = useRecoilState(invoiceAtom);
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault();
     setId(Math.random());
 

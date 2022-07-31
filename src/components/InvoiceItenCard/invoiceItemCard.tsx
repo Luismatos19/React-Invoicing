@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { Trash2 } from "react-feather";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { InvoiceItem } from "../../types/InvoiceItem";
 import { Card, Icon } from "./invoiceItemCard.styles";
-import { Trash2 } from "react-feather";
-import { useRecoilState, useRecoilValue } from "recoil";
 import invoiceAtom from "../../recoil/invoice/atom";
 import { Invoice } from "../../types/Invoice";
 import currencyAtom from "../../recoil/Currency/atom";
 import { convertCurrencyToSymbol } from "../../utils/functions/convertCurrencyToSymbol";
+import calculationWithDiscount from "../../utils/functions/calculationWithDiscount";
+import calculationWithExchange from "../../utils/functions/calculationWithExchange";
 
 interface Props {
   invoiceItem: InvoiceItem;
@@ -15,12 +17,7 @@ interface Props {
 }
 
 const InvoiceItemCard: React.FC<Props> = ({ invoiceItem, invoiceId }) => {
-  const total = () => {
-    return (
-      (invoiceItem.cost * invoiceItem.quantity * invoiceItem.discount) / 100
-    );
-  };
-
+  const [cost, setCost] = useState<number>(0);
   const [invoices, setInvoices] = useRecoilState(invoiceAtom);
   const currency = useRecoilValue(currencyAtom);
 
@@ -38,6 +35,12 @@ const InvoiceItemCard: React.FC<Props> = ({ invoiceItem, invoiceId }) => {
     setInvoices(newInvoicesList);
   };
 
+  useEffect(() => {
+    calculationWithExchange(invoiceItem.cost, currency).then((value) =>
+      setCost(value)
+    );
+  });
+
   return (
     <>
       <Card>
@@ -45,12 +48,16 @@ const InvoiceItemCard: React.FC<Props> = ({ invoiceItem, invoiceId }) => {
         <p>{invoiceItem.quantity}</p>
         <p>
           {convertCurrencyToSymbol[currency]}
-          {invoiceItem.cost}
+          {cost}
         </p>
         <p>{invoiceItem.discount}</p>
         <p>
           {convertCurrencyToSymbol[currency]}
-          {total()}
+          {calculationWithDiscount(
+            cost,
+            invoiceItem.quantity,
+            invoiceItem.discount
+          )}
         </p>
         <Icon>
           <Trash2 onClick={handleDeleteItem} />

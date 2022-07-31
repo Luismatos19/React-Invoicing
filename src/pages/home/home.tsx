@@ -14,8 +14,6 @@ const Home: React.FC = () => {
   const invoices = useRecoilValue(invoiceAtom);
   const navigate = useNavigate();
 
-  const handleAddInvoice = () => {};
-
   const handleCardClick = (invoiceId: number) => {
     navigate(`/fatura/${invoiceId}`);
   };
@@ -25,12 +23,6 @@ const Home: React.FC = () => {
       <Container>
         <Content>
           <Title text="Faturas" />
-          <div className="button">
-            <Button onClick={handleAddInvoice} color="primary">
-              <Plus />
-              Adicionar
-            </Button>
-          </div>
 
           {invoices.map((invoice) => (
             <InvoiceCard

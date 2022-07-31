@@ -6,11 +6,4 @@ export const Content = styled.div`
   width: 100%;
   align-items: center;
   background-color: ${({ theme: { colors } }) => colors.white};
-
-  .button {
-    width: 80%;
-    display: flex;
-    justify-content: flex-end;
-    margin: 3em;
-  }
 `;

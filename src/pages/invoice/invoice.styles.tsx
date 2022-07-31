@@ -84,3 +84,10 @@ export const selectCustomStyles = {
     marginTop: "5%",
   }),
 };
+
+export const TotalSection = styled.div`
+  display: flex;
+  width: 40%;
+  margin: 1em auto;
+  justify-content: space-between;
+`;

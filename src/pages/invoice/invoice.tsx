@@ -21,20 +21,33 @@ import {
   Section,
   selectCustomStyles,
   Subtitle,
+  TotalSection,
 } from "./invoice.styles";
 import { currencyOptionsMock } from "../../mocks/currencyOptionsMock";
 import currencyAtom from "../../recoil/Currency/atom";
+import calculationWithDiscount from "../../utils/functions/calculationWithDiscount";
+import { convertCurrencyToSymbol } from "../../utils/functions/convertCurrencyToSymbol";
+import { EyeOff } from "react-feather";
+import { InvoiceItem } from "../../types/InvoiceItem";
+import { Invoice } from "../../types/Invoice";
+import invoiceItemsAtom from "../../recoil/invoiceItem/atom";
 
 const Invoice: React.FC = () => {
   const [isPrintMode, setIsPrintMode] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [isLogoVisible, setisLogoVisible] = useState<boolean>(true);
   const componentRef = useRef(null);
+
+  let subTotal = 0;
 
   const params = useParams();
   const invoiceId = Number(params.id);
 
   const invoice = useRecoilValue(getInvoiceById(invoiceId))[0];
   const [currency, setCurrency] = useRecoilState(currencyAtom);
+  const [invoices, setInvoicesItems] = useRecoilState(invoiceItemsAtom);
+
+  setInvoicesItems(invoice.items);
 
   const handlePrintMode = () => {
     setIsPrintMode(!isPrintMode);
@@ -44,9 +57,30 @@ const Invoice: React.FC = () => {
     content: () => componentRef.current,
   });
 
-  const handleCurrencyChange = (e: any) => {
+  const handleCurrencyChange = async (e: any) => {
     setSelectedOption(e.value);
     setCurrency(e.value);
+  };
+
+  const subtotalCalculation = (): string => {
+    invoice.items.map((item: InvoiceItem) => {
+      const itemTotal = calculationWithDiscount(
+        item.cost,
+        item.quantity,
+        item.discount
+      );
+      subTotal = subTotal + itemTotal;
+    });
+    return subTotal.toFixed(2);
+  };
+
+  const totalWithTax = (): string => {
+    const tax = subTotal * (invoice.tax / 100);
+    return (subTotal + tax).toFixed(2);
+  };
+
+  const handleHideLogo = (): void => {
+    setisLogoVisible(!isLogoVisible);
   };
 
   return (
@@ -54,26 +88,8 @@ const Invoice: React.FC = () => {
       <Container>
         <PrintMode active={isPrintMode} ref={componentRef}>
           <Title text="Fatura" />
-          <Logo src={hasLogo(invoice.logo)} />
-          {!isPrintMode && (
-            <Select
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 0,
-                colors: {
-                  ...theme.colors,
-                  text: "orangered",
-                  primary25: "hotpink",
-                  primary: "black",
-                },
-              })}
-              styles={selectCustomStyles}
-              value={selectedOption}
-              onChange={handleCurrencyChange}
-              options={currencyOptionsMock}
-              placeholder="Selecione uma moeda"
-            />
-          )}
+          {isLogoVisible && <Logo src={hasLogo(invoice.logo)} />}
+          <EyeOff onClick={handleHideLogo} />
           <Section>
             <InfoSection>
               <Subtitle>Cliente</Subtitle>
@@ -121,7 +137,25 @@ const Invoice: React.FC = () => {
               </Infos>
             </InfoSection>
           </Section>
-
+          {!isPrintMode && (
+            <Select
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 0,
+                colors: {
+                  ...theme.colors,
+                  text: "orangered",
+                  primary25: "hotpink",
+                  primary: "black",
+                },
+              })}
+              styles={selectCustomStyles}
+              value={selectedOption}
+              onChange={handleCurrencyChange}
+              options={currencyOptionsMock}
+              placeholder="Selecione uma moeda"
+            />
+          )}
           <Subtitle className="items">Itens</Subtitle>
           <InfoHeader>
             <p>Descrição</p>
@@ -134,10 +168,35 @@ const Invoice: React.FC = () => {
           {invoice.items.map((item, index) => (
             <InvoiceItenCard
               key={index}
-              invoiceItem={item}
               invoiceId={invoice.id}
+              invoiceItem={item}
             />
           ))}
+          +
+          <TotalSection>
+            <h2>
+              <b>Subtotal:</b>
+            </h2>
+            <p>
+              {convertCurrencyToSymbol[currency]}
+              {subtotalCalculation()}
+            </p>
+          </TotalSection>
+          <TotalSection>
+            <h2>
+              <b>Impostos:</b>
+            </h2>
+            <p>{invoice.tax}%</p>
+          </TotalSection>
+          <TotalSection>
+            <h2>
+              <b>Total:</b>
+            </h2>
+            <p>
+              {convertCurrencyToSymbol[currency]}
+              {totalWithTax()}
+            </p>
+          </TotalSection>
           {!isPrintMode && <ItemForm invoiceId={invoice.id} />}
           <ButtonContainer>
             <Button onClick={handlePrintMode} color="primary">

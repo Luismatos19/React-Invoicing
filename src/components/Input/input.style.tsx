@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 export const Label = styled.label`
   display: flex;
@@ -14,7 +14,4 @@ export const InputDefault = styled.input`
   margin-top: 10px;
   border: 2px solid ${({ theme: { colors } }) => colors.primary};
   border-radius: 5px;
-  ::placeholder {
-    color: palevioletred;
-  }
 `;

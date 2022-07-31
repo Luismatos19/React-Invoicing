@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack')
 
 const app_dir = __dirname + '/src';
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template: __dirname + '/public/index.html',
   filename: 'index.html',
@@ -67,9 +69,18 @@ const config = {
       },
     ]
   },
-  plugins: [HTMLWebpackPluginConfig],
+  plugins: [
+    HTMLWebpackPluginConfig,
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
+    new Dotenv()
+  ],
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx"]
+    extensions: [".ts", ".tsx", ".js", ".jsx"],
+    alias: {
+      process: "process/browser"
+    },
   },
   optimization: {
     removeAvailableModules: false,
