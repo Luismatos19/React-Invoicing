@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useReactToPrint } from "react-to-print";
+import Select from "react-select";
 
 import { Button } from "../../components/Button/button";
 import InvoiceItenCard from "../../components/InvoiceItenCard/invoiceItemCard";
@@ -18,19 +19,24 @@ import {
   Logo,
   PrintMode,
   Section,
+  selectCustomStyles,
   Subtitle,
 } from "./invoice.styles";
+import { currencyOptionsMock } from "../../mocks/currencyOptionsMock";
+import currencyAtom from "../../recoil/Currency/atom";
 
 interface Props {}
 
 const Invoice: React.FC<Props> = () => {
   const [isPrintMode, setIsPrintMode] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState(null);
   const componentRef = useRef(null);
 
   let params = useParams();
   const invoiceId = Number(params.id);
 
   const invoice = useRecoilValue(getInvoiceById(invoiceId))[0];
+  const [currency, setCurrency] = useRecoilState(currencyAtom);
 
   const handlePrintMode = () => {
     setIsPrintMode(!isPrintMode);
@@ -40,12 +46,36 @@ const Invoice: React.FC<Props> = () => {
     content: () => componentRef.current,
   });
 
+  const handleCurrencyChange = (e: any) => {
+    setSelectedOption(e.value);
+    setCurrency(e.value);
+  };
+
   return (
     <>
       <Container>
         <PrintMode active={isPrintMode} ref={componentRef}>
           <Title text="Fatura" />
           <Logo src={hasLogo(invoice.logo)} />
+          {!isPrintMode && (
+            <Select
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 0,
+                colors: {
+                  ...theme.colors,
+                  text: "orangered",
+                  primary25: "hotpink",
+                  primary: "black",
+                },
+              })}
+              styles={selectCustomStyles}
+              value={selectedOption}
+              onChange={handleCurrencyChange}
+              options={currencyOptionsMock}
+              placeholder="Selecione uma moeda"
+            />
+          )}
           <Section>
             <InfoSection>
               <Subtitle>Cliente</Subtitle>
@@ -98,7 +128,7 @@ const Invoice: React.FC<Props> = () => {
           <InfoHeader>
             <p>Descrição</p>
             <p>Quantidade</p>
-            <p>Preço</p>
+            <p>Preço: {currency}</p>
             <p>Desconto %</p>
             <p>Total</p>
             <p>Açoes</p>

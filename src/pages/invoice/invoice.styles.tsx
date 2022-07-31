@@ -52,6 +52,10 @@ export const PrintMode = styled("div")<{ active: boolean }>`
     `
     max-height: 100%;
   `}
+
+  Select {
+    border: 1px solid red;
+  }
 `;
 
 export const InfoHeader = styled.div`
@@ -64,3 +68,19 @@ export const InfoHeader = styled.div`
     width: 7%;
   }
 `;
+export const selectCustomStyles = {
+  group: (provided: any) => ({
+    ...provided,
+    border: "1px solid red",
+  }),
+  option: (provided: any, state: { isSelected: boolean }) => ({
+    ...provided,
+    borderBottom: "2px",
+    color: state.isSelected ? "yellow" : "black",
+    backgroundColor: state.isSelected ? "green" : "white",
+  }),
+  control: (provided: any) => ({
+    ...provided,
+    marginTop: "5%",
+  }),
+};

@@ -1,10 +1,13 @@
 import React from "react";
+
 import { InvoiceItem } from "../../types/InvoiceItem";
 import { Card, Icon } from "./invoiceItemCard.styles";
 import { Trash2 } from "react-feather";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import invoiceAtom from "../../recoil/invoice/atom";
 import { Invoice } from "../../types/Invoice";
+import currencyAtom from "../../recoil/Currency/atom";
+import { convertCurrencyToSymbol } from "../../utils/functions/convertCurrencyToSymbol";
 
 interface Props {
   invoiceItem: InvoiceItem;
@@ -19,6 +22,7 @@ const InvoiceItemCard: React.FC<Props> = ({ invoiceItem, invoiceId }) => {
   };
 
   const [invoices, setInvoices] = useRecoilState(invoiceAtom);
+  const currency = useRecoilValue(currencyAtom);
 
   const handleDeleteItem = () => {
     const newInvoicesList: Invoice[] = JSON.parse(JSON.stringify(invoices));
@@ -39,9 +43,15 @@ const InvoiceItemCard: React.FC<Props> = ({ invoiceItem, invoiceId }) => {
       <Card>
         <p>{invoiceItem.description}</p>
         <p>{invoiceItem.quantity}</p>
-        <p>{invoiceItem.cost}</p>
+        <p>
+          {convertCurrencyToSymbol[currency]}
+          {invoiceItem.cost}
+        </p>
         <p>{invoiceItem.discount}</p>
-        <p>{total()}</p>
+        <p>
+          {convertCurrencyToSymbol[currency]}
+          {total()}
+        </p>
         <Icon>
           <Trash2 onClick={handleDeleteItem} />
         </Icon>

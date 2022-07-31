@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Card = styled.div`
   display: flex;
-  justify-content: space-between;
+  //justify-content: space-between;
   align-items: center;
   padding: 0.2em;
   width: 80%;
@@ -13,10 +13,13 @@ export const Card = styled.div`
 
   p {
     font-size: ${({ theme: { fontSizes } }) => fontSizes.small};
+    overflow: hidden;
+    width: 25%;
+    padding: 0.1em;
   }
 
   p:first-child {
-    width: 7%;
+    margin-right: 1em;
   }
 `;
 export const Icon = styled.span`
