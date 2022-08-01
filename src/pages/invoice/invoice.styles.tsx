@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../utils/styles/device";
 
 export const Subtitle = styled.div`
   background-color: ${({ theme: { colors } }) => colors.primary};
@@ -27,14 +28,22 @@ export const Infos = styled.div`
 
 export const Section = styled.section`
   display: flex;
+  flex-direction: column;
   width: 80%;
   margin-bottom: ${({ theme: { margins } }) => margins.medium};
+
+  @media ${device.tablet} {
+    flex-direction: row;
+  }
 `;
 
 export const InfoSection = styled.section`
   display: flex;
   flex-direction: column;
-  width: 50%;
+
+  @media ${device.tablet} {
+    width: 50%;
+  }
 `;
 
 export const Logo = styled.img`
@@ -63,9 +72,15 @@ export const InfoHeader = styled.div`
   width: 80%;
   justify-content: space-between;
   margin-bottom: ${({ theme: { margins } }) => margins.medium};
+  font-size: 0.2em;
+  font-weight: bold;
 
   p:first-child {
     width: 7%;
+  }
+
+  @media ${device.mobileL} {
+    font-size: 1em;
   }
 `;
 export const selectCustomStyles = {
