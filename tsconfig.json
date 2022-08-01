@@ -30,5 +30,5 @@
   "moduleResolution": "node",
   "include": [
     "src"
-  ]
+, "config/setupTests.js"  ]
 }
