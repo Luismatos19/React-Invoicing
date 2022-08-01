@@ -31,8 +31,9 @@ const ItemForm: React.FC<Props> = ({ invoiceId }) => {
       quantity: quantity,
       discount: discount,
     };
+
     const newInvoicesList: Invoice[] = JSON.parse(JSON.stringify(invoices));
-    const invoice: any = newInvoicesList.find((item) => item.id === invoiceId);
+    const invoice = newInvoicesList.filter((item) => item.id === invoiceId)[0];
     invoice.items = [...invoice.items, newItem];
 
     setInvoices(newInvoicesList);

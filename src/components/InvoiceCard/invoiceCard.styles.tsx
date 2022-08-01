@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { device } from "../../utils/styles/device";
 
 export const Card = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   width: 80%;
   border: 2px solid ${({ theme: { colors } }) => colors.black};
   border-radius: 10px;
@@ -16,6 +17,11 @@ export const Card = styled.div`
     box-shadow: 5px 10px ${({ theme: { colors } }) => colors.gray};
     background-color: ${({ theme: { colors } }) => colors.primary};
   }
+
+  @media ${device.tablet} {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `;
 
 export const Avatar = styled.img`
@@ -27,5 +33,7 @@ export const Avatar = styled.img`
 `;
 
 export const Info = styled.div`
-  padding-right: 3em;
+  @media ${device.tablet} {
+    padding-right: 3em;
+  }
 `;

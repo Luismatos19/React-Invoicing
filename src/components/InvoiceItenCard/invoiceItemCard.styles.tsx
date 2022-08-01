@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../utils/styles/device";
 
 export const Card = styled.div`
   display: flex;
@@ -19,6 +20,9 @@ export const Card = styled.div`
 
   p:first-child {
     margin-right: 1em;
+  }
+
+  @media ${device.tablet} {
   }
 `;
 export const Icon = styled.span`

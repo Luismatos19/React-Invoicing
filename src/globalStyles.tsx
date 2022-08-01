@@ -45,6 +45,11 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+html, body{
+overflow-x: hidden;
+height: 100%;
+}
 `;
 
 export default GlobalStyle;

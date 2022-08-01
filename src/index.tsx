@@ -11,13 +11,13 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <HashRouter>
-      <RecoilRoot>
+  <RecoilRoot>
+    <React.StrictMode>
+      <HashRouter>
         <App />
-      </RecoilRoot>
-    </HashRouter>
-  </React.StrictMode>
+      </HashRouter>
+    </React.StrictMode>
+  </RecoilRoot>
 );
 
 reportWebVitals();
