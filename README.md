@@ -1,46 +1,64 @@
-# Getting Started with Create React App
+# React Invoicing
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">React Invoicing</h1>
 
-## Available Scripts
+## Descrição do Projeto
+<p align="center"> React Invoicing é uma aplicação para gerenciamento de faturas. </p>
 
-In the project directory, you can run:
+## Conceitos ultilizados
+<p align="center"> Esse projeto foi desenvolvido com a Biblioteca React usando Typescript, Recoil para gereciamento de estado, Webpack, Styled Components entre outros</p>
 
-### `npm start`
+<h4 align="center"> 
+	🚧  Projeto Em construção...  🚧
+</h4>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Features
 
-### `npm test`
+- [x] Cadastro de faturas
+- [x] Edição de faturas
+- [x] Conversão de valores
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Pré-requisitos
 
-### `npm run build`
+Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/). 
+Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 🎲 Rodando o Projeto
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+# Clone este repositório
+$ git clone <https://github.com/luismatos19/React-Invoicing/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+# Instale as dependências
+$ npm install ou yarn
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# Criação de variaveis de ambiente
+$ Na raiz do projeto crie uma arquivo .env e adicione a variavel REACT_APP_API_KEY  para adicionar o token da API <https://api.invertexto.com/>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#OBS:
+$ esse projeto utiliza a api https://api.invertexto.com/api-conversor-moedas, para utilização dessa api e necesario um cadastro previo e geração de um token. O acesso é gratuito.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#Iniciando o Projeto
+$ `npm run build`: Gera versão de build, essa versão fica armazenada na pasta Build
+$ `npm run start`: Incia o localmente via Webpack
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# A aplicação inciará na porta:3000 - acesse <http://localhost:3000>
 
-## Learn More
+#Test
+$ Projeto conta com testes unitarios utilazando a biblioteca Jest. Rode o comando `npm run test` para rodar o script. 
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 🛠 Tecnologias
+
+As seguintes ferramentas foram usadas na construção do projeto:
+
+- [React] 
+- [TypeScript]
+- [Styled Components]
+- [Webpack]
+- [Jest]
+- [Babel]
