@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useReactToPrint } from "react-to-print";
@@ -31,14 +31,14 @@ import { EyeOff } from "react-feather";
 import { InvoiceItem } from "../../types/InvoiceItem";
 import { Invoice } from "../../types/Invoice";
 import invoiceItemsAtom from "../../recoil/invoiceItem/atom";
+import calculationWithExchange from "../../utils/functions/calculationWithExchange";
 
 const Invoice: React.FC = () => {
+  const [subtotal, setSubtotal] = useState<number>(0);
   const [isPrintMode, setIsPrintMode] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isLogoVisible, setisLogoVisible] = useState<boolean>(true);
   const componentRef = useRef(null);
-
-  let subTotal = 0;
 
   const params = useParams();
   const invoiceId = Number(params.id);
@@ -62,7 +62,8 @@ const Invoice: React.FC = () => {
     setCurrency(e.value);
   };
 
-  const subtotalCalculation = (): string => {
+  const subtotalCalculation = (): void => {
+    let subTotal = 0;
     invoice.items.map((item: InvoiceItem) => {
       const itemTotal = calculationWithDiscount(
         item.cost,
@@ -71,17 +72,24 @@ const Invoice: React.FC = () => {
       );
       subTotal = subTotal + itemTotal;
     });
-    return subTotal.toFixed(2);
+
+    calculationWithExchange(subTotal, currency).then((value) =>
+      setSubtotal(value)
+    );
   };
 
   const totalWithTax = (): string => {
-    const tax = subTotal * (invoice.tax / 100);
-    return (subTotal + tax).toFixed(2);
+    const tax = subtotal * (invoice.tax / 100);
+    return (subtotal + tax).toFixed(2);
   };
 
   const handleHideLogo = (): void => {
     setisLogoVisible(!isLogoVisible);
   };
+
+  useEffect(() => {
+    subtotalCalculation();
+  });
 
   return (
     <>
@@ -179,7 +187,7 @@ const Invoice: React.FC = () => {
             </h2>
             <p>
               {convertCurrencyToSymbol[currency]}
-              {subtotalCalculation()}
+              {subtotal}
             </p>
           </TotalSection>
           <TotalSection>
